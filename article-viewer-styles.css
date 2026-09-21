@@ -1776,7 +1776,11 @@ application related properties
         max-height: 100vh
     }
 
-    article,
+    article {
+        flex-direction: column;
+        max-width: 100vw;
+    }
+
     article:has(#layout-switch-state:checked) {
         flex-direction: column;
         max-width: 100vw;

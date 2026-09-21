@@ -434,6 +434,12 @@ function createMap(mapId, coordinates) {
  * @returns {void}
  */
 function keepApplicationFrameInPlace() {
+    // Desktop uses two independently scrolling, fixed-height panels. On smaller
+    // screens the panels are stacked and the document itself is the intended
+    // scroll container, so resetting the root scroll position would prevent
+    // all touch and wheel scrolling.
+    if(!window.matchMedia("(min-width: 925px)").matches) return;
+
     const documentRoot = document.scrollingElement;
     if(documentRoot === null) return;
     if(documentRoot.scrollTop !== 0) {documentRoot.scrollTop = 0;}

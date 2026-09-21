@@ -1766,79 +1766,96 @@ application related properties
 /* MEDIA QUERIES
 ------------------*/
 
-/* Small devices (smart phones and tablets, 576px and up) */
-@media (min-width: 100px) and (max-width: 1110px) {
+/* Small devices (phones and tablets) */
+@media (max-width: 924px) {
 
-    html { font-size: 80%; } 
+    html {
+        font-size: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 
     body {
-        flex-direction: column;
-        max-height: 100vh
+        display: block;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
-    article {
-        flex-direction: column;
-        max-width: 100vw;
+    #main-wrapper,
+    article,
+    #text-content-wrapper,
+    #panel-wrapper {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: auto;
+        min-height: 0;
     }
 
+    #main-wrapper {
+        display: block;
+    }
+
+    article,
     article:has(#layout-switch-state:checked) {
         flex-direction: column;
-        max-width: 100vw;
     }
 
     #layout-switch {
         display: none;
     }
 
-    #panel-wrapper {
-        padding-bottom: 0;
-    }
-
-    #nav-header {
+    #main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
         width: 100%;
-        max-width: 100%;
         height: auto;
-        position: relative;
     }
 
     .panel-buttons {
-        padding: 1vh 2vw;
-        font-size: 2rem;
-    }
-
-    #text-content-wrapper {
-        width: 100%;
-        max-width: 100%;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.65rem 0.8rem;
+        font-size: 1.25rem;
     }
 
     .text-body {
-        padding: 5% 8% 5% 8%;
+        padding: 2rem clamp(1rem, 8vw, 2.5rem);
     }
-    
+
+    #text-content-wrapper,
     #panel-wrapper {
-        width: 100%;
-        max-width: 100%;
-        box-shadow: 4px 1px 14px 0px #000000;
+        overflow: visible;
+        resize: none;
+    }
+
+    #panel-wrapper {
+        padding-bottom: 0;
+        box-shadow: 0 -4px 14px rgb(0 0 0 / 20%);
     }
 
     .panel {
-        padding: 5% 10%;
+        padding: 2rem clamp(1rem, 8vw, 2.5rem);
     }
 
-    #article-header {
-        width:100% !important;
+    #cover,
+    #cover-area {
+        height: auto;
         max-width: 100%;
-        max-width: 100%;
+    }
+
+    #cover {
+        min-height: 100dvh;
     }
 
     #cover-area {
-        height:auto;
-        max-width:100%;
-        padding: 6%;
+        padding: clamp(1.25rem, 8vw, 2.5rem);
     }
 
-    .journal-logo {
-        padding: 0 30% 0 0;
+    #journal-logo > .logo-img {
+        width: min(90%, 20rem);
     }
 
     .article-title {
@@ -1858,18 +1875,31 @@ application related properties
     }
     
     nav.panel-navigation {
+        height: auto;
         padding: 0;
         text-align: left;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: thin;
     }
-    
+
     nav.panel-navigation ul {
-        padding: 0 4%;
+        display: flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        min-width: 100%;
+        padding: 0;
         margin: 0;
         writing-mode: initial;
     }
 
+    nav.panel-navigation li {
+        flex: 0 0 auto;
+    }
+
     span.fa {
-        padding: 1vh 2vw;
+        padding: 0;
         font-size: 1.25rem;
     }
 
@@ -1879,31 +1909,176 @@ application related properties
 
     p[id] {
         font-weight: 300;
-        margin-bottom: 2%;
+        margin-bottom: 1rem;
+        text-align: justify;
         word-spacing: 0;
         hyphens: auto;
     }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
     a#back-to-top {
-        bottom: 1%;
-        left: 90%;
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: max(1rem, env(safe-area-inset-bottom));
+        left: auto;
+        min-width: 44px;
+        min-height: 44px;
+        margin: 0;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
     }
 
     details summary::before { 
-        padding-right: 1vw;;
+        padding-right: 0.5rem;
     }
 
     details[open] summary::before {
-         padding-right:1vw;
+        padding-right: 0.5rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 599px) {
+
+    :root {
+        --mobile-nav-height: 50px;
+    }
+
+    html {
+        scroll-padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+    }
+
+    body {
+        padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+    }
+
+    #main-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+        padding-top: env(safe-area-inset-top);
+        background: var(--journal-color-high-contrast);
+    }
+
+    nav.panel-navigation,
+    nav.panel-navigation ul {
+        height: var(--mobile-nav-height);
+    }
+
+    .panel-buttons {
+        min-width: var(--mobile-nav-height);
+        min-height: var(--mobile-nav-height);
+    }
+
+    #top {
+        scroll-margin-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+    }
+
+    a#back-to-top {
+        min-width: var(--mobile-nav-height);
+        min-height: var(--mobile-nav-height);
+    }
+
+    article > span[id^="panel-"] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    #text-content-wrapper {
+        display: block;
+    }
+
+    #panel-wrapper {
+        display: none;
+    }
+
+    body:has([id^="panel-"]:target) #text-content-wrapper,
+    body:has(#panel-wrapper :target) #text-content-wrapper {
+        display: none;
+    }
+
+    body:has([id^="panel-"]:target) #panel-wrapper,
+    body:has(#panel-wrapper :target) #panel-wrapper {
+        display: block;
+    }
+
+    body:has(#text-content-wrapper :target) #text-content-wrapper {
+        display: block;
+    }
+
+    body:has(#text-content-wrapper :target) #panel-wrapper {
+        display: none;
+    }
+
+    body:has(#panel-cover:target) #panel-wrapper,
+    body:has(#cover :target) #panel-wrapper {
+        display: block;
+        order: 1;
+    }
+
+    body:has(#panel-cover:target) #text-content-wrapper,
+    body:has(#cover :target) #text-content-wrapper {
+        display: block;
+        order: 2;
+    }
+
+    .article-title,
+    .article-subtitle,
+    .article-authors,
+    .article-contributors {
+        text-align: start;
+    }
+
+    .article-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .main-section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    table:not(.stats-table) {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+    }
+
+    table:not(.stats-table) > tbody {
+        display: table;
+        width: max-content;
+        min-width: 100%;
+        border-collapse: collapse;
+    }
+
+    table:not(.stats-table) > tbody > tr {
+        display: table-row;
+    }
+
+    table:not(.stats-table) > tbody > tr > td {
+        display: table-cell;
+        min-width: 8rem;
+        overflow: visible;
+        padding: 0.5rem;
+    }
+
+    .map {
+        height: clamp(15rem, 60dvh, 24rem);
     }
 }
 
 /* Medium devices (desktops, old screens, 925px and up) */
-@media (min-width: 1100px) and (max-width: 1300px) {
+@media (min-width: 925px) and (max-width: 1199px) {
 
     html { font-size: 82.5%; } 
 
@@ -1925,7 +2100,7 @@ application related properties
 
 }
 /* large devices (small desktop, notebook screens, 1200px and up) */
-@media (min-width: 1300px) and (max-width: 1600px) {
+@media (min-width: 1200px) and (max-width: 1599px) {
 
     html { font-size: 90%; }
 

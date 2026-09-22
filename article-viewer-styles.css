@@ -1663,19 +1663,22 @@ summary::-webkit-details-marker {
 
 details summary::before { 
     color: #100e0e;
-    content: "⮞";
-    padding-right: 0.5vw;;
+    content: "\2B9E"; /* ⮞ */
+    padding-right: 0.5vw;
+    font-family: 'Noto Sans Symbols 2', sans-serif; 
 }
 
 details[open] summary::before {
     color: #100e0e;
-    content:"⮞";
+    content: "\2B9E"; /* ⮞ */
     padding-right:0.5vw;
+    font-family: 'Noto Sans Symbols 2', sans-serif; 
 }
 
 .internal-index-anchor::before {
-    content: "⮞";
+    content: "\2B9E"; /* ⮞ */
     padding-right:0.5vw;
+    font-family: 'Noto Sans Symbols 2', sans-serif; 
 }
 
 
@@ -2130,3 +2133,4 @@ application related properties
         column-gap: 4%;
     }
 }
+

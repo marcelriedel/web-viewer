@@ -714,8 +714,8 @@ a.index-ref::before {
 
 a.index-ref > span {
     content: "↩";
-    padding-right: 0.5vw;
     color: var(--journal-color-high-contrast);
+    font-size: 1.5rem;
 }
 
 /* Table elements 
@@ -1979,6 +1979,9 @@ application related properties
         min-height: var(--mobile-nav-height);
     }
 
+    /* Panel state anchors exist only to hold the URL hash. Keeping them at
+       their generated position between both content areas makes fragment
+       navigation scroll the mobile viewport before the view is switched. */
     article > span[id^="panel-"] {
         position: fixed;
         top: 0;
@@ -1990,6 +1993,8 @@ application related properties
         pointer-events: none;
     }
 
+    /* Phone view state: show the article until a supplementary panel is
+       selected. The URL hash remains the single source of interaction state. */
     #text-content-wrapper {
         display: block;
     }
@@ -2016,6 +2021,8 @@ application related properties
         display: none;
     }
 
+    /* Cover is the combined mobile reading view: cover first, followed by the
+       complete article text. Other panel targets remain single-panel views. */
     body:has(#panel-cover:target) #panel-wrapper,
     body:has(#cover :target) #panel-wrapper {
         display: block;

@@ -684,7 +684,7 @@ a.fig-ref {
 a.bib-ref {
     cursor: help;
     color: rgb(17 16 16);
-    font-size: var(--panel-text-font-size);
+    font-size: 0.9rem !important;
     border-bottom: 1px dotted #242423;
     text-decoration: none;
 }
@@ -992,7 +992,7 @@ ul#toc-list {
 }
 
 .footnote > p {
-    font-size: var(--panel-text-font-size) !important;
+    font-size: 0.9rem !important;
     display: inline;
     word-break: break-word;
     text-align: left;
@@ -1003,6 +1003,7 @@ ul#toc-list {
 }
 
 .footnote > .label {
+    font-size: 0.9rem !important;
     color: black;
     font-size: var(--panel-text-font-size);
     font-weight: 500;
@@ -1136,35 +1137,34 @@ figcaption > span.label::after {
 }
 
 figcaption > p {
+    display:inline !important;
     color: var(--panel-text-color) !important;
-    display: inline;
     font-size: 0.9rem !important;
-    margin: 0;
+    margin: 0 !important;
     line-height: 1.6 !important;
 }
 
 figcaption > .attribution {
-    display: block;
+    display: block !important;
     color: var(--panel-text-color);
     margin: 0;
     font-size: 0.9rem !important;
+    font-style:italic;
 }
 
 figcaption > .license-p {
     color: var(--panel-text-color);
     margin: 0;
     font-size: 0.9rem !important;
-}
-
-figcaption > .license-p::before {
-    content: "License: ";
-    font-size: 0.9rem !important;
+    font-style:italic;
 }
 
 .license-p > .license-url {
+    display: inline;
     color: var(--panel-text-color);
     margin: 0;
     font-size: 0.9rem !important;
+    font-style:italic;
 }
 
 .license-p > .license-url::before {
@@ -1315,7 +1315,7 @@ img:not(.iDAI-icon,.logo-img) {
 -----------------------*/
 
 .internal-index-box {
-    padding-top: 2%;
+    padding: 0;
     overflow: hidden;
     text-overflow: clip;
     width: 95%;

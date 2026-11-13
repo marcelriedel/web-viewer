@@ -1328,7 +1328,7 @@ img:not(.iDAI-icon,.logo-img) {
     cursor: pointer;
     width: fit-content;
     font-size: 0.75rem;
-    margin-top: 1%;
+    margin-top: 2%;
     padding: 1% 2% 1% 2%;
     border-radius: 10px;
     background: #f0f0f0;
@@ -2062,11 +2062,15 @@ application related properties
     }
 
     details summary::before { 
-        padding-right: 0.5rem;
+        padding-right: 0.75rem;
     }
 
     details[open] summary::before {
-        padding-right: 0.5rem;
+        padding-right: 0.75rem;
+    }
+
+    .meta-name {
+        margin: 5% 0 0 0;
     }
 }
 

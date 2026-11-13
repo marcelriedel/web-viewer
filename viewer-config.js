@@ -26,7 +26,7 @@ window.HtmlViewerConfig = Object.freeze({
         },
         "NotoSans": {
             "type": "text/css",
-            "source": "https://fonts.bunny.net/css?family=noto-sans:300|noto-sans-symbols-2:400"
+            "source": "https://fonts.bunny.net/css?family=noto-sans:300"
         }
     }),
     panelSearch: Object.freeze({

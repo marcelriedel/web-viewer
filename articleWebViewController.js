@@ -8,6 +8,7 @@ const elementSelectorsConfig = window.HtmlViewerConfig?.elementSelectorsConfig |
 // prevent scrolling of application frame (window)
 keepApplicationFrameInPlace();
 window.addEventListener("scroll", keepApplicationFrameInPlace);
+window.addEventListener("resize", keepApplicationFrameInPlace);
 
 /* ------------------------------------
 INITIALIZE STANDALONE WEB-VIEW
@@ -438,7 +439,10 @@ function keepApplicationFrameInPlace() {
     // screens the panels are stacked and the document itself is the intended
     // scroll container, so resetting the root scroll position would prevent
     // all touch and wheel scrolling.
-    if(!window.matchMedia("(min-width: 925px)").matches) return;
+    const scrollMode = getComputedStyle(document.documentElement)
+        .getPropertyValue("--viewer-scroll-mode")
+        .trim();
+    if(scrollMode !== "fixed") return;
 
     const documentRoot = document.scrollingElement;
     if(documentRoot === null) return;

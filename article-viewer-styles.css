@@ -5,7 +5,10 @@
     --panel-background: white;
     --panel-text-color: rgb(85, 83, 83);
     --panel-text-font-size: 1rem;
-    --primary-font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  
+    --link-color-high-contrast: rgb(14, 55, 80);
+    --primary-font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mobile-nav-height: 50px;
+    --viewer-scroll-mode: fixed;
 }
 
 * {
@@ -16,7 +19,7 @@
 }
 
 html {
-    font-size: 120%;
+    font-size: 100%;
     overflow:hidden; 
     overflow: clip;
     scroll-behavior: auto;
@@ -171,7 +174,7 @@ a#back-to-top {
     opacity: 0.9;
     background-color: #d7d7d7;
     cursor: pointer;
-    padding: 5px 15px;
+    padding: 5px 12.5px;
     font-size: 1.5rem;
     border-radius: 10px;
     color: #000000;
@@ -218,12 +221,16 @@ nav.panel-navigation {
 }
 
 nav.panel-navigation ul {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     padding: 2vh 0;
-    writing-mode: tb;
+    list-style: none;
 }
 
 nav.panel-navigation li {
-    display: inline-block;
+    display: block;
+    width: 100%;
 }
 
 span.fa {
@@ -236,15 +243,25 @@ span.fa {
     fill: currentColor;
 }
 
+.icon-label {
+    display: block;
+    font-family: var(--primary-font-family);
+    font-size: 0.4em;
+    line-height: 2;
+    white-space: nowrap;
+}
+
 .panel-buttons {
     font-weight: 500;
     color: #ffffff;
-    padding: 1vh 1vw;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
     border: none;
     background: none;
     text-decoration: none;
     display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .panel-buttons:hover {
@@ -532,18 +549,11 @@ p.catalog-number {
 }
 
 .paragraph-counter {
+    color: rgb(54, 54, 54);
     font-size: 0.85rem;
     margin-right: 2vw;
     font-style:normal;
     cursor: help;
-}
-
-.paragraph-counter::before {
-    content: "["
-}
-
-.paragraph-counter::after {
-    content: "]"
 }
 
 /* boxed-text: 
@@ -610,6 +620,7 @@ a {
     font-weight: 300;
     text-decoration: underline;
     word-break: auto-phrase;
+
 }
 
 a.highlight {
@@ -643,18 +654,20 @@ a#doi-anchor {
 }
 
 a#journal-doi-link {
-    color:rgb(23 94 139);
+    color:var(--link-color-high-contrast);;
     text-decoration: underline;
 }
 
 a#journal-doi-link:visited {
-    color:rgb(23 94 139);
+    color:var(--link-color-high-contrast);;
 }
 
 a.fn-ref {
-    text-decoration: none;
     font-size: 1rem;
     color: var(--journal-color-high-contrast);
+    /* test quieter links */
+    border-bottom: 1px dotted #242423;
+    text-decoration: none;
 }
 
 a.fn-ref:before {
@@ -663,6 +676,9 @@ a.fn-ref:before {
 
 a.fig-ref {
     color:var(--journal-color-high-contrast);
+     /* test quieter links */
+    border-bottom: 1px dotted #242423;
+    text-decoration: none;
 }
 
 a.bib-ref {
@@ -674,8 +690,11 @@ a.bib-ref {
 }
 
 a.ext-ref {
-    color: rgb(23 94 139);
+    color: var(--link-color-high-contrast);
     word-break: break-all;
+     /* test quieter links */
+    border-bottom: 1px dotted #242423;
+    text-decoration: none;
 }
 
 a.ext-ref[data-specific-use="extrafeatures"] {
@@ -753,6 +772,19 @@ td > p {
 
 /* article cover section 
 ------------------------*/
+#title-department {
+    font-family: var(--primary-font-family);
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 4vh;
+}
+
+#title-department:before {
+    font-family: var( --short-text-font);
+    content: "DAI ";
+    font-weight: 600;
+}
+
 #cover {
     height:100vh;
     font-family: var(--primary-font-family);
@@ -765,7 +797,7 @@ td > p {
 #cover-area {
     display: flex;
     flex-direction: column;
-    padding: 6% 8% 6% 8%;
+    padding: 4% 8% 4% 8%;
     background: var(--journal-color-high-contrast);
 }
 
@@ -806,7 +838,8 @@ td > p {
 }
 
 #poster-image > img {
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     padding: 0;
     box-shadow: none;
 }
@@ -862,7 +895,7 @@ td > p {
 
 #project-meta-section > p {
     color:#e7e7e7;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
 }
 
 .project-meta-title-span {
@@ -1079,7 +1112,7 @@ figure.highlight {
 
 figure > img {
     width: 100%;
-    border-radius:10px;
+    /* border-radius:10px; */
     box-shadow: 3px 2px 11px #dedede;
     padding: 0.25%;
     background: white;
@@ -1111,61 +1144,46 @@ figcaption > p {
 }
 
 figcaption > .attribution {
+    display: block;
     color: var(--panel-text-color);
     margin: 0;
-    padding: 0.1rem;
     font-size: 0.9rem !important;
-}
-
-figcaption > .attribution::before {
-    content: "["
-}
-
-figcaption > .attribution::after {
-    content: "]"
 }
 
 figcaption > .license-p {
     color: var(--panel-text-color);
     margin: 0;
-    padding: 0.1rem;
     font-size: 0.9rem !important;
 }
 
 figcaption > .license-p::before {
-    content: "[";
-    display: inline;
-}
-
-figcaption > .license-p::after {
-    content: "]";
-}
-
-figcaption > .license-url {
-    color: var(--panel-text-color);
-    margin: 0;
-    padding: 0.1rem;
+    content: "License: ";
     font-size: 0.9rem !important;
 }
 
-figcaption > .license-url::before {
-    content: "[";
-    display: inline;
+.license-p > .license-url {
+    color: var(--panel-text-color);
+    margin: 0;
+    font-size: 0.9rem !important;
 }
 
-figcaption > .license-url::after {
-    content: "]";
+.license-p > .license-url::before {
+    content: ", ";
+    font-size: 0.9rem !important;
 }
 
-/*
-figure > a.internal-index-anchor {
-    order: 3 !important;
+/* order elements within figure */
+figure > img {
+    order: 1;
 }
 
-figure > .internal-index-box {
-    order: 4;
+figure > figCaption {
+    order: 2;
 }
-    */
+
+figure > details {
+    order: 3;
+}
 
 img.inline-graphic {
     display: inline-block;
@@ -1308,10 +1326,14 @@ img:not(.iDAI-icon,.logo-img) {
     width: fit-content;
     font-size: 0.75rem;
     margin-top: 1%;
-    padding: 1% 2% 1% 1%;
+    padding: 1% 2% 1% 2%;
     border-radius: 10px;
     background: #f0f0f0;
     color: black;
+}
+
+.internal-index-summary::marker {
+    margin-right:5rem;
 }
 
 .quote-list-entry {
@@ -1415,7 +1437,7 @@ mark {
     word-break: keep-all;
 }
 
-#orcid-icon {
+.orcid-icon {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -1432,7 +1454,7 @@ mark {
     word-break: keep-all;
 }
 
-#ror-icon {
+.ror-icon {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -1542,7 +1564,7 @@ mark {
 }
 
 .publisher-loc > a {
-    color: rgb(23 94 139);
+    color: var(--link-color-high-contrast);
     font-size: 0.9rem;
 }
 
@@ -1585,12 +1607,12 @@ mark {
 }
 
 #source-link-imprint > #doi-anchor {
-    color: rgb(23 94 139);
+    color: var(--link-color-high-contrast);
     word-break: break-all;
 }
 
 #jatsinform-link {
-    color: rgb(23 94 139);
+    color: var(--link-color-high-contrast);
     text-decoration: underline;
 }
 
@@ -1766,18 +1788,24 @@ application related properties
 /* MEDIA QUERIES
 ------------------*/
 
-/* Small devices (phones and tablets) */
+/* Compact layout: phones and tablets */
 @media (max-width: 924px) {
+
+    :root {
+        --viewer-scroll-mode: document;
+    }
 
     html {
         font-size: 100%;
         overflow-x: hidden;
         overflow-y: auto;
+        scroll-padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
     }
 
     body {
         display: block;
         min-height: 100dvh;
+        padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
         overflow-x: hidden;
         overflow-y: auto;
     }
@@ -1807,18 +1835,69 @@ application related properties
     }
 
     #main-header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        right: 0;
+        left: 0;
+        height: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+        padding-top: env(safe-area-inset-top);
+        background: var(--journal-color-high-contrast);
         z-index: 1000;
-        width: 100%;
-        height: auto;
+    }
+
+    nav.panel-navigation {
+        height: var(--mobile-nav-height);
+        padding: 0;
+        text-align: left;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: thin;
+    }
+
+    nav.panel-navigation ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: max-content;
+        min-width: 100%;
+        height: var(--mobile-nav-height);
+        padding: 0;
+        margin: 0;
+        writing-mode: initial;
+    }
+
+    nav.panel-navigation li {
+        flex: 0 0 auto;
+        width: auto;
     }
 
     .panel-buttons {
-        min-width: 44px;
-        min-height: 44px;
+        width: auto;
+        min-width: var(--mobile-nav-height);
+        min-height: var(--mobile-nav-height);
         padding: 0.65rem 0.8rem;
         font-size: 1.25rem;
+    }
+
+    span.fa {
+        padding: 0;
+        font-size: 1.25rem;
+    }
+
+    #top {
+        scroll-margin-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
+    }
+
+    a#back-to-top {
+        min-width: calc(var(--mobile-nav-height) * 0.9);
+        min-height: var(--mobile-nav-height);
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: max(1rem, env(safe-area-inset-bottom));
+        left: auto;
+        margin: 0;
+        padding: 5px 12.5px;
+        text-align: center;
     }
 
     .text-body {
@@ -1858,125 +1937,8 @@ application related properties
         width: min(90%, 20rem);
     }
 
-    .article-title {
-        text-align: center;
-    }
-
-    .article-subtitle {
-        text-align: center;
-    }
-
-    .article-authors {
-        text-align: center;
-    }
-
-    .article-contributors {
-        text-align: center;
-    }
-    
-    nav.panel-navigation {
-        height: auto;
-        padding: 0;
-        text-align: left;
-        overflow-x: auto;
-        overflow-y: hidden;
-        overscroll-behavior-inline: contain;
-        scrollbar-width: thin;
-    }
-
-    nav.panel-navigation ul {
-        display: flex;
-        flex-wrap: nowrap;
-        width: max-content;
-        min-width: 100%;
-        padding: 0;
-        margin: 0;
-        writing-mode: initial;
-    }
-
-    nav.panel-navigation li {
-        flex: 0 0 auto;
-    }
-
-    span.fa {
-        padding: 0;
-        font-size: 1.25rem;
-    }
-
     a#dai-home {
-       display:none;
-    }
-
-    p[id] {
-        font-weight: 300;
-        margin-bottom: 1rem;
-        text-align: justify;
-        word-spacing: 0;
-        hyphens: auto;
-    }
-
-    a#back-to-top {
-        right: max(1rem, env(safe-area-inset-right));
-        bottom: max(1rem, env(safe-area-inset-bottom));
-        left: auto;
-        min-width: 44px;
-        min-height: 44px;
-        margin: 0;
-        padding: 0.5rem 0.75rem;
-        text-align: center;
-    }
-
-    details summary::before { 
-        padding-right: 0.5rem;
-    }
-
-    details[open] summary::before {
-        padding-right: 0.5rem;
-    }
-}
-
-/* Small phones */
-@media (max-width: 599px) {
-
-    :root {
-        --mobile-nav-height: 50px;
-    }
-
-    html {
-        scroll-padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
-    }
-
-    body {
-        padding-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
-    }
-
-    #main-header {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        height: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
-        padding-top: env(safe-area-inset-top);
-        background: var(--journal-color-high-contrast);
-    }
-
-    nav.panel-navigation,
-    nav.panel-navigation ul {
-        height: var(--mobile-nav-height);
-    }
-
-    .panel-buttons {
-        min-width: var(--mobile-nav-height);
-        min-height: var(--mobile-nav-height);
-    }
-
-    #top {
-        scroll-margin-top: calc(var(--mobile-nav-height) + env(safe-area-inset-top));
-    }
-
-    a#back-to-top {
-        min-width: var(--mobile-nav-height);
-        min-height: var(--mobile-nav-height);
+        display: none;
     }
 
     /* Panel state anchors exist only to hold the URL hash. Keeping them at
@@ -1993,7 +1955,7 @@ application related properties
         pointer-events: none;
     }
 
-    /* Phone view state: show the article until a supplementary panel is
+    /* Compact view state: show the article until a supplementary panel is
        selected. The URL hash remains the single source of interaction state. */
     #text-content-wrapper {
         display: block;
@@ -2054,6 +2016,14 @@ application related properties
         font-size: 1.3rem;
     }
 
+    p[id] {
+        font-weight: 300;
+        margin-bottom: 1rem;
+        text-align: justify;
+        word-spacing: 0;
+        hyphens: auto;
+    }
+
     table:not(.stats-table) {
         display: block;
         max-width: 100%;
@@ -2082,45 +2052,17 @@ application related properties
     .map {
         height: clamp(15rem, 60dvh, 24rem);
     }
-}
 
-/* Medium devices (desktops, old screens, 925px and up) */
-@media (min-width: 925px) and (max-width: 1199px) {
-
-    html { font-size: 82.5%; } 
-
-    #article-header {
-        max-width: 100%;
+    details summary::before { 
+        padding-right: 0.5rem;
     }
 
-    #panel-wrapper {
-        width: 50%;
-    }
-
-    .text-body {
-        padding: 5% 8% 5% 12%;
-    }
-
-    a#back-to-top {
-       padding: 5px 10px;
-    }
-
-}
-/* large devices (small desktop, notebook screens, 1200px and up) */
-@media (min-width: 1200px) and (max-width: 1599px) {
-
-    html { font-size: 90%; }
-
-    .text-body {
-        padding: 5% 8% 5% 10%;
-    }
-
-    a#back-to-top {
-       padding: 5px 10px;
+    details[open] summary::before {
+        padding-right: 0.5rem;
     }
 }
 
-/* XX-Large devices (desktop, larger screens, 1600px and up) */
+/* Wide layout */
 @media (min-width: 1600px) {
     .text-body > section {
         column-count: 2;
@@ -2130,4 +2072,3 @@ application related properties
         column-gap: 4%;
     }
 }
-

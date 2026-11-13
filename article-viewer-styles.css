@@ -551,7 +551,7 @@ p.catalog-number {
 .paragraph-counter {
     color: rgb(54, 54, 54);
     font-size: 0.85rem;
-    margin-right: 2vw;
+    margin-right: 5%;
     font-style:normal;
     cursor: help;
 }
@@ -775,7 +775,7 @@ td > p {
 #title-department {
     font-family: var(--primary-font-family);
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-top: 4vh;
 }
 
@@ -822,6 +822,7 @@ td > p {
     font-weight: 300;
     font-size: 1rem;
     margin-top: 2vh;
+    font-style: italic;
 }
 
 .article-contributors {
@@ -838,8 +839,8 @@ td > p {
 }
 
 #poster-image > img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     padding: 0;
     box-shadow: none;
 }
@@ -1159,16 +1160,18 @@ figcaption > .license-p {
     font-style:italic;
 }
 
-.license-p > .license-url {
+.license-url {
     display: inline;
-    color: var(--panel-text-color);
     margin: 0;
     font-size: 0.9rem !important;
-    font-style:italic;
+    color: var(--link-color-high-contrast);
+    word-break: break-all;
+    border-bottom: 1px dotted #242423;
+    text-decoration: none;
 }
 
-.license-p > .license-url::before {
-    content: ", ";
+.license-url::before {
+    content: "License: ";
     font-size: 0.9rem !important;
 }
 
@@ -1876,8 +1879,8 @@ application related properties
         width: auto;
         min-width: var(--mobile-nav-height);
         min-height: var(--mobile-nav-height);
-        padding: 0.65rem 0.8rem;
-        font-size: 1.25rem;
+        padding: 0.65rem 0;
+        font-size: 1.25rem
     }
 
     span.fa {
@@ -2018,10 +2021,15 @@ application related properties
 
     p[id] {
         font-weight: 300;
-        margin-bottom: 1rem;
-        text-align: justify;
+        margin-bottom: 0.95rem;
+        text-align: left;
         word-spacing: 0;
-        hyphens: auto;
+        hyphens: none;
+        line-height: 1.5;
+    }
+
+    .paragraph-counter {
+        margin-right: 10%;
     }
 
     table:not(.stats-table) {
